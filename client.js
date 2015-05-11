@@ -1,5 +1,12 @@
 $(function () {
 
+	$.post("/detect_user.php", function (data) {
+		array = JSON.parse(data);
+		if (array["results"] == "1") {
+			alert("Hello user " + array["id"] + " called " + array["screen_name"]);
+		}
+	});
+
 	$('.login input.screen_name').keyup(function (e) {
 		if ($(this).val() == "") {
 			$('.login .enter').fadeOut();
