@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +32,7 @@
 				<br /><br />
 				<input placeholder="Enter a screen name" class="screen_name" />
 				<a class="enter">&#10152;</a>
+				<img class="loading" src="loading.gif" />
 			</p>
 		</div>
 		

@@ -19,4 +19,15 @@ $(function () {
 		$('.tooltip').remove();
 	});
 
+	$('a.enter').click(function () {
+		screen_name = $('.screen_name').val();
+		$('.login .enter').fadeOut();
+		$('.login .loading').fadeIn();
+		$.post("/create_user.php", { screen_name: screen_name }, function () {
+			setTimeout(function () {
+				location.reload();
+			}, 2000);
+		});
+	});
+
 });

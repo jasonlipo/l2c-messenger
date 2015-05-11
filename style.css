@@ -26,3 +26,4 @@ i.status.offline { background: #AAA !important; }
 .login input.screen_name:focus { border: 1px solid #2B94D9; }
 .login a.enter { display: none; position: absolute; font-size: 35px; margin: 14px 0 0 -45px; }
 .login a.enter:hover { cursor:pointer; color: #2B94D9; }
+.login .loading { display:none; position: absolute; height: 30px; margin: 24px 0 0 -46px; }
