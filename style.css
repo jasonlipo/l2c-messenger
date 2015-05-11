@@ -1,0 +1,24 @@
+* { margin: 0; padding: 0; }
+body { font: 14px Arial, sans-serif; background: #2B94D9; color: #fff; }
+
+.heading { margin: 30px; text-align: center; }
+.heading b { font-family: 'Montserrat', sans-serif; font-size:55px; }
+
+.container { width: 900px; min-height: 450px; background: #EBEBEB; color: #000; margin-top: 20px; margin-bottom: 40px; position: absolute; left: 50%; margin-left: -470px; }
+.container .people { background: #2B3848; color: #FFF; width: 58px; height: 100%; position: absolute; }
+.container .people ul { list-style: none; }
+.container .people li { padding: 10px; height: 43px; border-bottom: 1px solid #37424C; }
+.container .people li .avatar { width: 35px; border-radius: 50%; margin: 5px 0px; border: 1px solid #888; }
+.container .people li i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 31px 1px; border: 1px solid #888; }
+.container .people li i.status.online { background: #32A932; }
+.container .people li i.status.busy { background: #E2D81F; }
+.container .people li i.status.unavailable { background: #A90606; }
+.container .people li i.status.offline { background: #AAA; }
+
+.login { position: absolute; width: 100%; padding-left: 58px; text-align: center; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; font-size: 16px; }
+.login h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; margin: 95px 0 35px; font-weight: 400; }
+.login p { color: #888; }
+.login input.screen_name { padding: 15px 22px; outline: none; font-family: Arial, sans-serif; font-size: 16px; margin-top: 15px; border-radius: 7px; border: 1px solid #aaa; width: 300px; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; }
+.login input.screen_name:focus { border: 1px solid #2B94D9; }
+.login a.enter { display: none; position: absolute; font-size: 35px; margin: 14px 0 0 -45px; }
+.login a.enter:hover { cursor:pointer; color: #2B94D9; }
