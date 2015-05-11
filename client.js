@@ -1,11 +1,14 @@
 $(function () {
 
-	$('.login input.screen_name').keyup(function () {
+	$('.login input.screen_name').keyup(function (e) {
 		if ($(this).val() == "") {
 			$('.login .enter').fadeOut();
 		}
 		else {
 			$('.login .enter').fadeIn();
+			if (e.keyCode == 13) {
+				NewUser();
+			}
 		}
 	});
 
@@ -19,15 +22,17 @@ $(function () {
 		$('.tooltip').remove();
 	});
 
-	$('a.enter').click(function () {
-		screen_name = $('.screen_name').val();
-		$('.login .enter').fadeOut();
-		$('.login .loading').fadeIn();
-		$.post("/create_user.php", { screen_name: screen_name }, function () {
-			setTimeout(function () {
-				location.reload();
-			}, 2000);
-		});
-	});
+	$('a.enter').click(NewUser);
 
 });
+
+function NewUser() {
+	screen_name = $('.screen_name').val();
+	$('.login .enter').fadeOut();
+	$('.login .loading').fadeIn();
+	$.post("/create_user.php", { screen_name: screen_name }, function () {
+		setTimeout(function () {
+			location.reload();
+		}, 2000);
+	});
+}
