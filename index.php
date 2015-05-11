@@ -63,6 +63,23 @@ session_start();
 		</div>
 
 		<div class="messages">
+			<div class="this-user">
+				<img class="avatar" src="avatar-standard.png" />
+				<div class="name">Jason Lipowicz</div>
+				<img class="compose" src="compose.png" />
+			</div>
+			<ul>
+				<li>
+					<img class="avatar" src="avatar-standard.png" />
+					<span class="name">Bob Smith</span>
+					<span class="recent-message">This is a test message to see if it works...</span>
+				</li>
+				<li>
+					<img class="avatar" src="avatar-standard.png" />
+					<span class="name">Bob Smith</span>
+					<span class="recent-message">This is a test message to see if it works...</span>
+				</li>
+			</ul>
 		</div>
 
 		<div class="contents">

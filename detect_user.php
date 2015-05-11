@@ -18,5 +18,8 @@ if (isset($_COOKIE['learn2code_user'])) {
 
 
 }
+else {
+	echo json_encode(array("results" => 0, "error" => "No cookie"));
+}
 
 ?>

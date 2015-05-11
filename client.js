@@ -3,7 +3,11 @@ $(function () {
 	$.post("/detect_user.php", function (data) {
 		array = JSON.parse(data);
 		if (array["results"] == "1") {
-			alert("Hello user " + array["id"] + " called " + array["screen_name"]);
+			$('.messages').show();
+			FetchChatData();
+		}
+		else {
+			$('.login').show();
 		}
 	});
 
@@ -32,6 +36,10 @@ $(function () {
 	$('a.enter').click(NewUser);
 
 });
+
+function FetchChatData() {
+
+}
 
 function NewUser() {
 	screen_name = $('.screen_name').val();
