@@ -4,7 +4,7 @@ body { font: 14px Arial, sans-serif; background: #2B94D9; color: #fff; }
 .heading { margin: 30px; text-align: center; }
 .heading b { font-family: 'Montserrat', sans-serif; font-size:55px; }
 
-.container { width: 900px; min-height: 450px; background: #EBEBEB; color: #000; margin-top: 20px; margin-bottom: 40px; position: absolute; left: 50%; margin-left: -470px; }
+.container { width: 900px; min-height: 450px; background: #EBEBEB; color: #000; margin-top: 10px; margin-bottom: 40px; position: absolute; left: 50%; margin-left: -480px; }
 .container .people { background: #2B3848; color: #FFF; width: 58px; height: 100%; position: absolute; }
 .container .people ul { list-style: none; }
 .container .people li { padding: 10px; height: 43px; border-bottom: 1px solid #37424C; }
