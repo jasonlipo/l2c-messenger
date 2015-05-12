@@ -87,7 +87,20 @@ function FetchChatData() {
 
 function FetchConvoData() {
 	$.post("/fetch_conversations.php", function (data) {
-		
+		convoInfo = JSON.parse(data);
+		$('.messages ul').html('');
+		for (x in convoInfo) {
+			id = convoInfo[x]["convoID"];
+			other_user = convoInfo[x]["other_user"];
+			recent_message = convoInfo[x]["messages"][convoInfo[x]["messages"].length-1];
+			recent_content = (recent_message["text"].length > 150) ? recent_message["text"].substr(0, 147) + "..." : recent_message["text"];
+			if (recent_message["to_me"] == false) { recent_content = "&#8594; " + recent_content; }
+			$('.messages ul').append('<li>\
+				<img class="avatar" src="avatar-standard.png" />\
+				<span class="name">'+other_user+'</span>\
+				<span class="recent-message">'+recent_content+'</span>\
+			</li>');
+		}
 	});
 	setTimeout(FetchChatData, 10000);
 }

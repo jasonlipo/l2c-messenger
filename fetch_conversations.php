@@ -12,7 +12,7 @@ while ($this_message = $all_messages->fetch_assoc()) {
 	$other_user = ($this_message["user0"] == $this_user) ? $this_message["user1"] : $this_message["user0"];
 	$get_other_user = $db->query("SELECT screen_name FROM users WHERE userID = '$other_user'")->fetch_assoc();
 
-	if (!isset($output[$this_message["convoID"]]) {
+	if (!isset($output[$this_message["convoID"]])) {
 		$output[$this_message["convoID"]] = ["convoID" => $this_message["convoID"], "other_user" => $get_other_user["screen_name"], "messages" => []];
 	}
 
@@ -20,6 +20,6 @@ while ($this_message = $all_messages->fetch_assoc()) {
 	$output[$this_message["convoID"]]["messages"][] = ["to_me" => ($which_user == $this_message["toUser"]), "seen" => $this_message["seen"], "sent" => $this_message["sent"], "text" => $this_message["text"], ];
 }
 
-echo json_encode($output);
+echo json_encode(array_values($output));
 
 ?>

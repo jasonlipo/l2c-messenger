@@ -47,16 +47,6 @@ session_start();
 				<div class="name"><i class="status online"></i></div>
 			</div>
 			<ul>
-				<li>
-					<img class="avatar" src="avatar-standard.png" />
-					<span class="name">Bob Smith</span>
-					<span class="recent-message">This is a test message to see if it works...</span>
-				</li>
-				<li>
-					<img class="avatar" src="avatar-standard.png" />
-					<span class="name">Bob Smith</span>
-					<span class="recent-message">This is a test message to see if it works...</span>
-				</li>
 			</ul>
 		</div>
 
