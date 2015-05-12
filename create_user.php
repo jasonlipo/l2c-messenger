@@ -10,9 +10,9 @@ if ($_POST['screen_name']) {
     shuffle($chars);
 	$code = implode(array_slice($chars, 0, 50));
 
-	$db->query("INSERT INTO users (screen_name, code) VALUES ('$screen_name', '$code')");
+	$db->query("INSERT INTO users (screen_name, code, status) VALUES ('$screen_name', '$code', 'offline')");
 
-	setcookie("learn2code_user", $code, time()+86400*30*12);
+	setcookie("learn2code_user", $code, time()+86400*30*12, "/");
 
 }
 

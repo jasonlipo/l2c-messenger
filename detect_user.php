@@ -13,6 +13,7 @@ if (isset($_COOKIE['learn2code_user'])) {
 		echo json_encode(array("results" => 1, "screen_name" => $row["screen_name"], "id" => $row["userID"]));
 	}
 	else {
+		setcookie("learn2code_user", null, -1, "/");
 		echo json_encode(array("results" => 0, "error" => "Not found"));
 	}
 

@@ -4,6 +4,7 @@ $(function () {
 		array = JSON.parse(data);
 		if (array["results"] == "1") {
 			$('.messages').show();
+			UpdateStatus('online');
 			FetchChatData();
 		}
 		else {
@@ -33,9 +34,22 @@ $(function () {
 		$('.tooltip').remove();
 	});
 
+	$('.container .messages .this-user i.status').click(function () {
+		var modes = ["online", "busy", "unavailable"];
+		current = $('.container .messages .this-user i.status').attr('class').split(" ")[1];
+		next_index = (modes.indexOf(current) + 1) > (modes.length - 1) ? 0 : modes.indexOf(current) + 1;
+		$('.container .messages .this-user i.status').removeClass(current);
+		$('.container .messages .this-user i.status').addClass(modes[next_index]);
+		UpdateStatus(modes[next_index]);
+	});
+
 	$('a.enter').click(NewUser);
 
 });
+
+function UpdateStatus(text) {
+	$.post("/update_status.php", { status: text });
+}
 
 function FetchChatData() {
 
