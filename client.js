@@ -95,14 +95,38 @@ function FetchConvoData() {
 			recent_message = convoInfo[x]["messages"][convoInfo[x]["messages"].length-1];
 			recent_content = (recent_message["text"].length > 150) ? recent_message["text"].substr(0, 147) + "..." : recent_message["text"];
 			if (recent_message["to_me"] == false) { recent_content = "&#8594; " + recent_content; }
-			$('.messages ul').append('<li>\
+			$('.messages ul').append('<li data-convoid="'+id+'">\
 				<img class="avatar" src="avatar-standard.png" />\
 				<span class="name">'+other_user+'</span>\
 				<span class="recent-message">'+recent_content+'</span>\
 			</li>');
 		}
+		ActivateMessages();
 	});
 	setTimeout(FetchChatData, 10000);
+}
+
+function ActivateMessages() {
+	$('.messages ul li').click(function () {
+		convoID = $(this).attr('data-convoid');
+		for (x in convoInfo) {
+			if (convoInfo[x]["convoID"] == convoID) {
+				$('.contents').html('\
+				<div data-otherid="'+convoInfo[x]["other_id"]+'" class="top-bar">\
+					<div class="name">'+convoInfo[x]["other_user"]+'<i class="status online"></i></div>\
+					<img class="close" src="/close.png" />\
+				</div><div class="scrollable"></div><div class="write"></div>');
+				for (y in convoInfo[x]["messages"]) {
+					message = convoInfo[x]["messages"][y];
+					$('.contents .scrollable').append('<li class="message '+(!convoInfo[x]["messages"][y]["to_me"]?"me":"")+'">\
+						<img class="avatar" src="avatar-standard.png" />\
+						<span class="text">'+convoInfo[x]["messages"][y]["text"]+'</span>\
+					</li>');
+				}
+				break;
+			}
+		}
+	});	
 }
 
 function NewUser() {

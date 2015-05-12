@@ -13,7 +13,7 @@ while ($this_message = $all_messages->fetch_assoc()) {
 	$get_other_user = $db->query("SELECT screen_name FROM users WHERE userID = '$other_user'")->fetch_assoc();
 
 	if (!isset($output[$this_message["convoID"]])) {
-		$output[$this_message["convoID"]] = ["convoID" => $this_message["convoID"], "other_user" => $get_other_user["screen_name"], "messages" => []];
+		$output[$this_message["convoID"]] = ["convoID" => $this_message["convoID"], "other_id" => $other_user, "other_user" => $get_other_user["screen_name"], "messages" => []];
 	}
 
 	$which_user = ($this_message["user0"] == $this_user) ? 0 : 1;

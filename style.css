@@ -38,3 +38,20 @@ i.status.offline { background: #AAA !important; }
 .messages ul li .avatar { width: 30px; float: left; }
 .messages ul li .name { font-weight: bold; display: block; margin: 2px 15px; float: left; }
 .messages ul li .recent-message { float: left; display: block; margin: -20px 0 0 46px; white-space: nowrap; text-overflow: ellipsis; width: 225px; overflow: hidden; }
+
+.container .contents { width: 540px; position: absolute; height: 100%; overflow: hidden; margin-left: 360px; background: #E6E9ED; }
+.contents .top-bar { background: #D6D6D6; height: 50px; border-bottom: 2px solid #CACACA; }
+.contents .top-bar .name { text-align: center; font-size: 18px; margin-top: 16px; position: absolute; width: 93%; }
+.contents .top-bar i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 5px 17px; border: 1px solid #888; }
+.contents .top-bar .close { height: 22px; position: absolute; right: 0; margin: 15px 20px; cursor: pointer; }
+.contents .scrollable { height: 345px; overflow-y: scroll; border-bottom: 1px solid #ccc; }
+.contents .scrollable li { list-style: none; }
+.contents .scrollable li .avatar { margin: 15px; position: absolute; }
+.contents .scrollable li .text { background: #fff; padding: 7px 14px; margin: 19px 0 15px 70px; display: inline-block; border: 1px solid #ccc; border-radius: 9px; }
+.contents .scrollable li .text:after { content: " "; border: 8px solid rgba(0, 0, 0, 0); border-right: 10px solid #FFF; position: absolute; margin: 0 0 0 55px; left: 0; }
+.contents .scrollable li .text:before { content: " "; left:0; border: 8px solid rgba(0, 0, 0, 0); border-right: 10px solid #CCC; margin: 0 0 0 53px; position: absolute; }
+.contents .scrollable li.me { text-align: right; }
+.contents .scrollable li.me .avatar { right: 0; margin: 15px 30px; }
+.contents .scrollable li.me .text { background: #2B94D9; color: #FFF; margin: 19px 70px 15px 0; }
+.contents .scrollable li.me .text:after { right: 0; left: initial; margin: 0 70px 0 0; border-right-color: rgba(0, 0, 0, 0); border-left-color: #2B94D9; }
+.contents .scrollable li.me .text:before { right: 0; left: initial; margin: 0 69px 0 0; border-right-color: rgba(0, 0, 0, 0); border-left-color: #CCC; }
