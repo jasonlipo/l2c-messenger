@@ -67,7 +67,6 @@ session_start();
 				<img class="avatar" src="avatar-standard.png" />
 				<div class="name">Jason Lipowicz</div>
 				<i class="status online"></i>
-				<img class="compose" src="compose.png" />
 			</div>
 			<ul>
 				<li>

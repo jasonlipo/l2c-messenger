@@ -6,6 +6,7 @@ $(function () {
 			$('.messages').show();
 			UpdateStatus('online');
 			FetchChatData();
+			UpdateOnlineTime();
 		}
 		else {
 			$('.login').show();
@@ -46,6 +47,11 @@ $(function () {
 	$('a.enter').click(NewUser);
 
 });
+
+function UpdateOnlineTime() {
+	$.post("/still_online.php");
+	setTimeout(UpdateOnlineTime, 30000);
+}
 
 function UpdateStatus(text) {
 	$.post("/update_status.php", { status: text });
