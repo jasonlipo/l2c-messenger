@@ -1,12 +1,16 @@
+var loggedIn = false;
+
 $(function () {
+
+	FetchChatData();
 
 	$.post("/detect_user.php", function (data) {
 		array = JSON.parse(data);
 		if (array["results"] == "1") {
 			$('.messages').show();
 			UpdateStatus('online');
-			FetchChatData();
 			UpdateOnlineTime();
+			loggedIn = true;
 		}
 		else {
 			$('.login').show();
@@ -23,16 +27,6 @@ $(function () {
 				NewUser();
 			}
 		}
-	});
-
-	$('.people ul li[data-hover]').hover(function () {
-		$('.tooltip').remove();
-		$('body').append('<div class="tooltip">' + $(this).find('i.status')[0].outerHTML + $(this).attr('data-hover') + '</div>');
-		t = $(this).position().top + $('.container').position().top + 30;
-		l = $(this).position().left + $('.container').position().left - 408;
-		$('.tooltip').css({ top: t, left: l });
-	}, function () {
-		$('.tooltip').remove();
 	});
 
 	$('.container .messages .this-user i.status').click(function () {
@@ -53,12 +47,36 @@ function UpdateOnlineTime() {
 	setTimeout(UpdateOnlineTime, 30000);
 }
 
+function HoversOnChatBar() {
+	$('.people ul li[data-hover]').hover(function () {
+		$('.tooltip').remove();
+		$('body').append('<div class="tooltip">' + $(this).find('i.status')[0].outerHTML + $(this).attr('data-hover') + '</div>');
+		t = $(this).position().top + $('.container').position().top + 30;
+		l = $(this).position().left + $('.container').position().left - 408;
+		$('.tooltip').css({ top: t, left: l });
+	}, function () {
+		$('.tooltip').remove();
+	});
+}
+
 function UpdateStatus(text) {
 	$.post("/update_status.php", { status: text });
 }
 
 function FetchChatData() {
-
+	$.post("/fetch_online.php", function (data) {
+		$('.people ul').html('');
+		array = JSON.parse(data);
+		for (x in array["information"]) {
+			result = array["information"][x];
+			$('.people ul').append('<li data-hover="'+result[1]+'">\
+				<i class="status '+result[2]+'"></i>\
+				<img class="avatar" src="avatar-standard.png" />\
+			</li>');
+		}
+		HoversOnChatBar();
+	});
+	setTimeout(FetchChatData, 10000);
 }
 
 function NewUser() {

@@ -38,27 +38,6 @@ session_start();
 		
 		<div class="people">
 		<ul>
-
-			<li data-hover="Jason Lipowicz">
-				<i class="status online"></i>
-				<img class="avatar" src="avatar-standard.png" />
-			</li>
-
-			<li data-hover="Jason Lipowicz">
-				<i class="status busy"></i>
-				<img class="avatar" src="avatar-standard.png" />
-			</li>
-
-			<li data-hover="Jason Lipowicz">
-				<i class="status unavailable"></i>
-				<img class="avatar" src="avatar-standard.png" />
-			</li>
-
-			<li data-hover="Jason Lipowicz">
-				<i class="status offline"></i>
-				<img class="avatar" src="avatar-standard.png" />
-			</li>
-
 		</ul>
 		</div>
 
