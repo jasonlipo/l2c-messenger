@@ -70,15 +70,27 @@ function UpdateStatus(text) {
 }
 
 function FetchChatData() {
+	var updated_open = false;
 	$.post("/fetch_online.php", function (data) {
 		$('.people ul').html('');
-		array = JSON.parse(data);
-		for (x in array["information"]) {
-			result = array["information"][x];
+		online_data = JSON.parse(data);
+		for (x in online_data["information"]) {
+			result = online_data["information"][x];
 			$('.people ul').append('<li data-hover="'+result[1]+'">\
 				<i class="status '+result[2]+'"></i>\
 				<img class="avatar" src="avatar-standard.png" />\
 			</li>');
+			if ($('.contents .top-bar[data-otherid="'+result[0]+'"]').size()) {
+				current = $('.contents .top-bar .status').attr('class').split(" ")[1];
+				$('.contents .top-bar .status').removeClass(current);
+				$('.contents .top-bar .status').addClass(result[2]);
+				updated_open = true;
+			}
+		}
+		if ($('.contents .top-bar').size() && !updated_open) {
+			current = $('.contents .top-bar .status').attr('class').split(" ")[1];
+			$('.contents .top-bar .status').removeClass(current);
+			$('.contents .top-bar .status').addClass("offline");
 		}
 		HoversOnChatBar();
 	});
@@ -108,25 +120,43 @@ function FetchConvoData() {
 
 function ActivateMessages() {
 	$('.messages ul li').click(function () {
+		
 		convoID = $(this).attr('data-convoid');
+		
 		for (x in convoInfo) {
+
 			if (convoInfo[x]["convoID"] == convoID) {
+
+				other_user_status = "offline";
+				for (j in online_data["information"]) {
+					if (online_data["information"][j][0] == convoInfo[x]["other_id"]) {
+						other_user_status = online_data["information"][j][2];
+					}
+				}
+
 				$('.contents').html('\
 				<div data-otherid="'+convoInfo[x]["other_id"]+'" class="top-bar">\
-					<div class="name">'+convoInfo[x]["other_user"]+'<i class="status online"></i></div>\
+					<div class="name">'+convoInfo[x]["other_user"]+'<i class="status '+other_user_status+'"></i></div>\
 					<img class="close" src="/close.png" />\
 				</div><div class="scrollable"></div><div class="write"></div>');
+
 				for (y in convoInfo[x]["messages"]) {
+
 					message = convoInfo[x]["messages"][y];
 					$('.contents .scrollable').append('<li class="message '+(!convoInfo[x]["messages"][y]["to_me"]?"me":"")+'">\
 						<img class="avatar" src="avatar-standard.png" />\
 						<span class="text">'+convoInfo[x]["messages"][y]["text"]+'</span>\
 					</li>');
+
 				}
+
 				break;
 			}
+
 		}
+
 	});	
+
 }
 
 function NewUser() {
