@@ -4,18 +4,7 @@ $(function () {
 
 	FetchChatData();
 
-	$.post("/detect_user.php", function (data) {
-		array = JSON.parse(data);
-		if (array["results"] == "1") {
-			$('.messages').show();
-			UpdateStatus('online');
-			UpdateOnlineTime();
-			loggedIn = true;
-		}
-		else {
-			$('.login').show();
-		}
-	});
+	DetectLoggedIn();	
 
 	$('.login input.screen_name').keyup(function (e) {
 		if ($(this).val() == "") {
@@ -41,6 +30,23 @@ $(function () {
 	$('a.enter').click(NewUser);
 
 });
+
+function DetectLoggedIn() {
+	$.post("/detect_user.php", function (data) {
+		user_data = JSON.parse(data);
+		if (user_data["results"] == "1") {
+			$('.messages').show();
+			$('.messages .this-user .name').prepend(user_data["screen_name"]);
+			UpdateStatus('online');
+			UpdateOnlineTime();
+			FetchConvoData();
+			loggedIn = true;
+		}
+		else {
+			$('.login').show();
+		}
+	});
+}
 
 function UpdateOnlineTime() {
 	$.post("/still_online.php");
@@ -75,6 +81,13 @@ function FetchChatData() {
 			</li>');
 		}
 		HoversOnChatBar();
+	});
+	setTimeout(FetchChatData, 30000);
+}
+
+function FetchConvoData() {
+	$.post("/fetch_conversations.php", function (data) {
+		
 	});
 	setTimeout(FetchChatData, 10000);
 }

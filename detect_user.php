@@ -10,10 +10,12 @@ if (isset($_COOKIE['learn2code_user'])) {
 
 	if ($find->num_rows > 0) {
 		$row = $find->fetch_assoc();
+		$_SESSION['userID'] = $row["userID"];
 		echo json_encode(array("results" => 1, "screen_name" => $row["screen_name"], "id" => $row["userID"]));
 	}
 	else {
 		setcookie("learn2code_user", null, -1, "/");
+		unset($_SESSION['userID']);
 		echo json_encode(array("results" => 0, "error" => "Not found"));
 	}
 

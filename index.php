@@ -44,8 +44,7 @@ session_start();
 		<div class="messages">
 			<div class="this-user">
 				<img class="avatar" src="avatar-standard.png" />
-				<div class="name">Jason Lipowicz</div>
-				<i class="status online"></i>
+				<div class="name"><i class="status online"></i></div>
 			</div>
 			<ul>
 				<li>
