@@ -40,6 +40,7 @@ function DetectLoggedIn() {
 			UpdateStatus('online');
 			UpdateOnlineTime();
 			FetchConvoData(true);
+			ClicksOnChatBar();
 			loggedIn = true;
 		}
 		else {
@@ -65,6 +66,19 @@ function HoversOnChatBar() {
 	});
 }
 
+function ClicksOnChatBar() {
+	$('.people ul li[data-id]').click(function () {
+		other_id = $(this).attr('data-id');
+		convoExists = $('.messages ul li[data-otherid="'+other_id+'"]');
+		if (convoExists.size()) {
+			convoExists.trigger('click');
+		}
+		else {
+			NewConversation(other_id);
+		}
+	});
+}
+
 function UpdateStatus(text) {
 	$.post("/update_status.php", { status: text });
 }
@@ -76,7 +90,7 @@ function FetchChatData() {
 		online_data = JSON.parse(data);
 		for (x in online_data["information"]) {
 			result = online_data["information"][x];
-			$('.people ul').append('<li data-hover="'+result[1]+'">\
+			$('.people ul').append('<li data-id="'+result[0]+'" data-hover="'+result[1]+'">\
 				<i class="status '+result[2]+'"></i>\
 				<img class="avatar" src="avatar-standard.png" />\
 			</li>');
@@ -93,6 +107,7 @@ function FetchChatData() {
 			$('.contents .top-bar .status').addClass("offline");
 		}
 		HoversOnChatBar();
+		if (loggedIn) { ClicksOnChatBar(); }
 	});
 	setTimeout(FetchChatData, 30000);
 }
@@ -107,7 +122,7 @@ function FetchConvoData(loop) {
 			recent_message = convoInfo[x]["messages"][convoInfo[x]["messages"].length-1];
 			recent_content = (recent_message["text"].length > 150) ? recent_message["text"].substr(0, 147) + "..." : recent_message["text"];
 			if (recent_message["to_me"] == false) { recent_content = "&#8594; " + recent_content; }
-			$('.messages ul').append('<li data-convoid="'+id+'">\
+			$('.messages ul').append('<li data-otherid="'+convoInfo[x]["other_id"]+'" data-convoid="'+id+'">\
 				<img class="avatar" src="avatar-standard.png" />\
 				<span class="name">'+other_user+'</span>\
 				<span class="recent-message">'+recent_content+'</span>\
@@ -175,6 +190,33 @@ function ActivateMessages() {
 
 }
 
+function NewConversation(user_id) {
+	
+	other_user_status = "offline";
+	other_user_name = "";
+	for (j in online_data["information"]) {
+		if (online_data["information"][j][0] == user_id) {
+			other_user_status = online_data["information"][j][2];
+			other_user_name = online_data["information"][j][1];
+		}
+	}
+
+	$('.contents').show();
+	$('.contents .top-bar, .contents .scrollable').remove();
+	$('.contents').prepend('\
+	<div data-convoid="" data-otherid="'+user_id+'" class="top-bar">\
+		<div class="name">'+other_user_name+'<i class="status '+other_user_status+'"></i></div>\
+		<img class="close" src="/close.png" />\
+	</div><div class="scrollable"></div>');
+
+	$('.contents .top-bar .close').click(function () {
+		$('.contents').hide();
+	});
+
+	EnterInTextarea();
+
+}
+
 function EnterInTextarea() {
 	$('.contents textarea.write').unbind('keypress');
 	$('.contents textarea.write').keypress(function (e) {
@@ -189,7 +231,10 @@ function EnterInTextarea() {
 function SendMessage() {
 	new_message = $('.contents textarea.write').val();
 	$('.container .contents img.loading').fadeIn();
-	$.post("/send_message.php", { other_user: $('.contents .top-bar').attr('data-otherid'), text: new_message }, function () {
+	$.post("/send_message.php", { other_user: $('.contents .top-bar').attr('data-otherid'), text: new_message }, function (newConvoID) {
+		if (newConvoID != "") {
+			$('.contents .top-bar').attr('data-convoid', newConvoID);
+		}
 		$('.contents textarea.write').val('');
 		FetchConvoData(false);
 	});

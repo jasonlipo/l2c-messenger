@@ -21,6 +21,7 @@ else {
 	$db->query("INSERT INTO conversations (user0, user1) VALUES ('$userID', '$other_user')");
 	$convoID = $db->insert_id;
 	$db->query("INSERT INTO messages (convoID, toUser, sent, text) VALUES ('$convoID', '1', '$time', '$message')");
+	echo $convoID;
 }
 
 
