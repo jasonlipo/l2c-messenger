@@ -51,6 +51,8 @@ session_start();
 		</div>
 
 		<div class="contents">
+			<textarea placeholder="Write a message" class="write"></textarea>
+			<img class="loading" src="loading.gif" />
 		</div>
 
 	</div>

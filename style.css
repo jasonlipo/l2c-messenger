@@ -20,14 +20,14 @@ i.status.busy { background: #E2D81F !important; }
 i.status.unavailable { background: #A90606 !important; }
 i.status.offline { background: #AAA !important; }
 
-.login { display:none; position: absolute; width: 100%; padding-left: 58px; text-align: center; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; font-size: 16px; }
-.login h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; margin: 95px 0 35px; font-weight: 400; }
-.login p { color: #888; }
-.login input.screen_name { padding: 15px 22px; outline: none; font-family: Arial, sans-serif; font-size: 16px; margin-top: 15px; border-radius: 7px; border: 1px solid #aaa; width: 300px; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; }
-.login input.screen_name:focus { border: 1px solid #2B94D9; }
-.login a.enter { display: none; position: absolute; font-size: 35px; margin: 14px 0 0 -45px; }
-.login a.enter:hover { cursor:pointer; color: #2B94D9; }
-.login .loading { display:none; position: absolute; height: 30px; margin: 24px 0 0 -46px; }
+.container .login { display:none; position: absolute; width: 100%; padding-left: 58px; text-align: center; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; font-size: 16px; }
+.container .login h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; margin: 95px 0 35px; font-weight: 400; }
+.container .login p { color: #888; }
+.container .login input.screen_name { padding: 15px 22px; outline: none; font-family: Arial, sans-serif; font-size: 16px; margin-top: 15px; border-radius: 7px; border: 1px solid #aaa; width: 300px; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; }
+.container .login input.screen_name:focus { border: 1px solid #2B94D9; }
+.container .login a.enter { display: none; position: absolute; font-size: 35px; margin: 14px 0 0 -45px; }
+.container .login a.enter:hover { cursor:pointer; color: #2B94D9; }
+.container .login .loading { display:none; position: absolute; height: 30px; margin: 24px 0 0 -46px; }
 
 .container .messages { display:none; width: 300px; position: absolute; height: 100%; overflow: hidden; margin-left: 58px; background: #E6E9ED; border-right: 2px solid #9A9EA5;}
 .container .messages .this-user { height: 50px; background: #D8D8D8; border-bottom: 2px solid #63656A;}
@@ -35,23 +35,26 @@ i.status.offline { background: #AAA !important; }
 .container .messages .this-user .name { position: absolute; font-weight: bold; font-size: 18px; margin: -31px 0 0 64px; }
 .container .messages .this-user i.status { width: 13px; height: 13px; border-radius: 50%; position: relative; margin: 0 0 0 15px; border: 1px solid #999; cursor: pointer; display: inline-block; vertical-align: -2px; }
 .container .messages ul li { border-bottom: 1px solid #C2C9D6; padding: 10px 15px; list-style: none; height: 40px; }
-.messages ul li .avatar { width: 30px; float: left; }
-.messages ul li .name { font-weight: bold; display: block; margin: 2px 15px; float: left; }
-.messages ul li .recent-message { float: left; display: block; margin: -20px 0 0 46px; white-space: nowrap; text-overflow: ellipsis; width: 225px; overflow: hidden; }
+.container .messages ul li:hover { cursor: pointer; background: #E9EEF5; }
+.container .messages ul li .avatar { width: 30px; float: left; }
+.container .messages ul li .name { font-weight: bold; display: block; margin: 2px 15px; float: left; }
+.container .messages ul li .recent-message { float: left; display: block; margin: -20px 0 0 46px; white-space: nowrap; text-overflow: ellipsis; width: 225px; overflow: hidden; }
 
-.container .contents { width: 540px; position: absolute; height: 100%; overflow: hidden; margin-left: 360px; background: #E6E9ED; }
-.contents .top-bar { background: #D6D6D6; height: 50px; border-bottom: 2px solid #CACACA; }
-.contents .top-bar .name { text-align: center; font-size: 18px; margin-top: 16px; position: absolute; width: 93%; }
-.contents .top-bar i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 5px 17px; border: 1px solid #888; }
-.contents .top-bar .close { height: 22px; position: absolute; right: 0; margin: 15px 20px; cursor: pointer; }
-.contents .scrollable { height: 345px; overflow-y: scroll; border-bottom: 1px solid #ccc; }
-.contents .scrollable li { list-style: none; }
-.contents .scrollable li .avatar { margin: 15px; position: absolute; }
-.contents .scrollable li .text { background: #fff; padding: 7px 14px; margin: 19px 0 15px 70px; display: inline-block; border: 1px solid #ccc; border-radius: 9px; }
-.contents .scrollable li .text:after { content: " "; border: 8px solid rgba(0, 0, 0, 0); border-right: 10px solid #FFF; position: absolute; margin: 0 0 0 55px; left: 0; }
-.contents .scrollable li .text:before { content: " "; left:0; border: 8px solid rgba(0, 0, 0, 0); border-right: 10px solid #CCC; margin: 0 0 0 53px; position: absolute; }
-.contents .scrollable li.me { text-align: right; }
-.contents .scrollable li.me .avatar { right: 0; margin: 15px 30px; }
-.contents .scrollable li.me .text { background: #2B94D9; color: #FFF; margin: 19px 70px 15px 0; }
-.contents .scrollable li.me .text:after { right: 0; left: initial; margin: 0 70px 0 0; border-right-color: rgba(0, 0, 0, 0); border-left-color: #2B94D9; }
-.contents .scrollable li.me .text:before { right: 0; left: initial; margin: 0 69px 0 0; border-right-color: rgba(0, 0, 0, 0); border-left-color: #CCC; }
+.container .contents { display:none; width: 540px; position: absolute; height: 100%; overflow: hidden; margin-left: 360px; background: #E6E9ED; }
+.container .contents .top-bar { background: #D6D6D6; height: 50px; border-bottom: 2px solid #CACACA; }
+.container .contents .top-bar .name { text-align: center; font-size: 18px; margin-top: 16px; position: absolute; width: 93%; }
+.container .contents .top-bar i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 5px 17px; border: 1px solid #888; }
+.container .contents .top-bar .close { height: 22px; position: absolute; right: 0; margin: 15px 20px; cursor: pointer; }
+.container .contents .scrollable { height: 345px; overflow-y: scroll; border-bottom: 1px solid #ccc; }
+.container .contents .scrollable li { list-style: none; }
+.container .contents .scrollable li .avatar { margin: 15px 15px 0; position: relative; float: left;}
+.container .contents .scrollable li .text { max-width: 205px; background: #fff; padding: 7px 14px; margin: 19px 0 15px -5px; display: inline-block; border: 1px solid #ccc; border-radius: 9px; }
+.container .contents .scrollable li .arrow1 { border: 8px solid rgba(0, 0, 0, 0); border-right: 10px solid #FFF; margin: 27px 0 0 -12px;    display: inline-block; position: relative; vertical-align: top;}
+.container .contents .scrollable li .arrow2 { border: 8px solid rgba(0, 0, 0, 0); border-right: 10px solid #CCC; margin: 27px 0 0 -20px; display: inline-block; vertical-align: top;}
+.container .contents .scrollable li.me { text-align: right; }
+.container .contents .scrollable li.me .avatar { float: right; margin: 15px 15px 0 0; }
+.container .contents .scrollable li.me .text { background: #2B94D9; color: #FFF; margin: 19px 0px 15px 0; }
+.container .contents .scrollable li.me .arrow1 { margin: 26px 7px 0 -18px; border-right-color: rgba(0, 0, 0, 0); border-left-color: #2B94D9; float: right;}
+.container .contents .scrollable li.me .arrow2 { border-right-color: rgba(0, 0, 0, 0); border-left-color: #CCC; float: right; margin: 26px 0 0 -1px;}
+.container .contents textarea.write { border: 0; resize: none; font: 14px Arial, sans-serif; width: 450px; height: 32px; padding: 10px; outline: none; overflow-y: scroll; padding-right: 80px; }
+.container .contents img.loading { display:none; position: absolute; height: 30px; margin: -44px 37px 0 0; right: 0; }

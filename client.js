@@ -39,7 +39,7 @@ function DetectLoggedIn() {
 			$('.messages .this-user .name').prepend(user_data["screen_name"]);
 			UpdateStatus('online');
 			UpdateOnlineTime();
-			FetchConvoData();
+			FetchConvoData(true);
 			loggedIn = true;
 		}
 		else {
@@ -97,7 +97,7 @@ function FetchChatData() {
 	setTimeout(FetchChatData, 30000);
 }
 
-function FetchConvoData() {
+function FetchConvoData(loop) {
 	$.post("/fetch_conversations.php", function (data) {
 		convoInfo = JSON.parse(data);
 		$('.messages ul').html('');
@@ -114,8 +114,13 @@ function FetchConvoData() {
 			</li>');
 		}
 		ActivateMessages();
+		if ($('.contents .top-bar').size()) {
+			convoid = $('.contents .top-bar').attr('data-convoid');
+			$('.messages ul li[data-convoid="'+convoid+'"]').trigger('click');
+		}
+		$('.container .contents img.loading').fadeOut();
 	});
-	setTimeout(FetchChatData, 10000);
+	if (loop) { setTimeout(function () { FetchConvoData(true) }, 30000); }
 }
 
 function ActivateMessages() {
@@ -134,21 +139,32 @@ function ActivateMessages() {
 					}
 				}
 
-				$('.contents').html('\
-				<div data-otherid="'+convoInfo[x]["other_id"]+'" class="top-bar">\
+				$('.contents').show();
+				$('.contents .top-bar, .contents .scrollable').remove();
+				$('.contents').prepend('\
+				<div data-convoid="'+convoID+'" data-otherid="'+convoInfo[x]["other_id"]+'" class="top-bar">\
 					<div class="name">'+convoInfo[x]["other_user"]+'<i class="status '+other_user_status+'"></i></div>\
 					<img class="close" src="/close.png" />\
-				</div><div class="scrollable"></div><div class="write"></div>');
+				</div><div class="scrollable"></div>');
 
 				for (y in convoInfo[x]["messages"]) {
 
 					message = convoInfo[x]["messages"][y];
 					$('.contents .scrollable').append('<li class="message '+(!convoInfo[x]["messages"][y]["to_me"]?"me":"")+'">\
 						<img class="avatar" src="avatar-standard.png" />\
+						<i class="arrow1"></i><i class="arrow2"></i>\
 						<span class="text">'+convoInfo[x]["messages"][y]["text"]+'</span>\
 					</li>');
 
 				}
+
+				$('.contents .top-bar .close').click(function () {
+					$('.contents').hide();
+				});
+
+				$('.scrollable').scrollTop($('.scrollable').height());
+
+				EnterInTextarea();
 
 				break;
 			}
@@ -157,6 +173,26 @@ function ActivateMessages() {
 
 	});	
 
+}
+
+function EnterInTextarea() {
+	$('.contents textarea.write').unbind('keypress');
+	$('.contents textarea.write').keypress(function (e) {
+		if (e.keyCode == 13) {
+			SendMessage();
+			e.preventDefault();
+			return false;
+		}
+	});
+}
+
+function SendMessage() {
+	new_message = $('.contents textarea.write').val();
+	$('.container .contents img.loading').fadeIn();
+	$.post("/send_message.php", { other_user: $('.contents .top-bar').attr('data-otherid'), text: new_message }, function () {
+		$('.contents textarea.write').val('');
+		FetchConvoData(false);
+	});
 }
 
 function NewUser() {
