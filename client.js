@@ -34,9 +34,9 @@ $(function () {
 function DetectLoggedIn() {
 	$.post("/detect_user.php", function (data) {
 		user_data = JSON.parse(data);
-		if (user_data["results"] == "1") {
+		if (user_data["sn"] != "") {
 			$('.messages').show();
-			$('.messages .this-user .name').prepend(user_data["screen_name"]);
+			$('.messages .this-user .name').prepend(user_data["sn"]);
 			UpdateStatus('online');
 			UpdateOnlineTime();
 			FetchConvoData(true);

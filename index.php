@@ -25,7 +25,7 @@ session_start();
 	<div class="container">
 
 		<div class="login">
-			<h1>Create an account</h1>
+			<h1 class="title">Create an account</h1>
 			<p>
 				Type a screen name.
 				<br />You will be remembered on this computer.

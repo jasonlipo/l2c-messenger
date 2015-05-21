@@ -1,4 +1,4 @@
-* { margin: 0; padding: 0; }
+html, head, body, input, table, span, div, ul, li { margin: 0; padding: 0; }
 body { font: 14px Arial, sans-serif; background: #2B94D9; color: #fff; }
 
 .tooltip { background: #2B3848; position: absolute; padding: 6px 12px; border-radius: 6px; }
