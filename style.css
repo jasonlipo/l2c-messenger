@@ -11,14 +11,6 @@ body { font: 14px Arial, sans-serif; background: #2B94D9; color: #fff; }
 .container { width: 900px; min-height: 450px; background: #EBEBEB; color: #000; margin-top: 10px; margin-bottom: 40px; position: absolute; left: 50%; margin-left: -480px; }
 .container .people { background: #2B3848; color: #FFF; width: 58px; height: 100%; position: absolute; }
 .container .people ul { list-style: none; }
-.container .people li { padding: 10px; height: 43px; border-bottom: 1px solid #37424C; }
-.container .people li i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 31px 1px; border: 1px solid #888; }
-
-.avatar { width: 35px; border-radius: 50%; margin: 5px 0px; border: 1px solid #888; }
-i.status.online { background: #32A932 !important; }
-i.status.busy { background: #E2D81F !important; }
-i.status.unavailable { background: #A90606 !important; }
-i.status.offline { background: #AAA !important; }
 
 .container .login { display:none; position: absolute; width: 100%; padding-left: 58px; text-align: center; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; font-size: 16px; }
 .container .login h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; margin: 95px 0 35px; font-weight: 400; }
@@ -46,6 +38,10 @@ i.status.offline { background: #AAA !important; }
 .container .contents .top-bar i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 5px 17px; border: 1px solid #888; }
 .container .contents .top-bar .close { height: 22px; position: absolute; right: 0; margin: 15px 20px; cursor: pointer; }
 .container .contents .scrollable { height: 345px; overflow-y: scroll; border-bottom: 1px solid #ccc; }
+.container .contents textarea.write { border: 0; resize: none; font: 14px Arial, sans-serif; width: 450px; height: 32px; padding: 10px; outline: none; overflow-y: scroll; padding-right: 80px; }
+.container .contents img.loading { display:none; position: absolute; height: 30px; margin: -44px 37px 0 0; right: 0; }
+
+/******/
 .container .contents .scrollable li { list-style: none; }
 .container .contents .scrollable li .avatar { margin: 15px 15px 0; position: relative; float: left;}
 .container .contents .scrollable li .text { max-width: 205px; background: #fff; padding: 7px 14px; margin: 19px 0 15px -5px; display: inline-block; border: 1px solid #ccc; border-radius: 9px; }
@@ -56,5 +52,12 @@ i.status.offline { background: #AAA !important; }
 .container .contents .scrollable li.me .text { background: #2B94D9; color: #FFF; margin: 19px 0px 15px 0; }
 .container .contents .scrollable li.me .arrow1 { margin: 26px 7px 0 -18px; border-right-color: rgba(0, 0, 0, 0); border-left-color: #2B94D9; float: right;}
 .container .contents .scrollable li.me .arrow2 { border-right-color: rgba(0, 0, 0, 0); border-left-color: #CCC; float: right; margin: 26px 0 0 -1px;}
-.container .contents textarea.write { border: 0; resize: none; font: 14px Arial, sans-serif; width: 450px; height: 32px; padding: 10px; outline: none; overflow-y: scroll; padding-right: 80px; }
-.container .contents img.loading { display:none; position: absolute; height: 30px; margin: -44px 37px 0 0; right: 0; }
+
+.container .people li { padding: 10px; height: 43px; border-bottom: 1px solid #37424C; }
+.container .people li i.status { width: 8px; height: 8px; background: #fff; position: absolute; border-radius: 50%; margin: 31px 1px; border: 1px solid #888; }
+
+.avatar { width: 35px; border-radius: 50%; margin: 5px 0px; border: 1px solid #888; }
+i.status.online { background: #32A932 !important; }
+i.status.busy { background: #E2D81F !important; }
+i.status.unavailable { background: #A90606 !important; }
+i.status.offline { background: #AAA !important; }
