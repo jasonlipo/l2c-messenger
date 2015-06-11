@@ -111,21 +111,30 @@ function FetchChatData() {
 	});
 	setTimeout(FetchChatData, 30000);
 }
-
 function FetchConvoData(loop) {
-	$.post("/fetch_conversations.php", function (data) {
-		convoInfo = JSON.parse(data);
+    // AJAX call to get conversations
+    $.post("/fetch_conversations.php", function (data) {
+		// Convert object notation back to JavaScript
+        convoInfo = JSON.parse(data);
 		$('.messages ul').html('');
+        // Loop through all conversations
 		for (x in convoInfo) {
 			id = convoInfo[x]["convoID"];
 			other_user = convoInfo[x]["other_user"];
 			recent_message = convoInfo[x]["messages"][convoInfo[x]["messages"].length-1];
-			recent_content = (recent_message["text"].length > 150) ? recent_message["text"].substr(0, 147) + "..." : recent_message["text"];
-			if (recent_message["to_me"] == false) { recent_content = "&#8594; " + recent_content; }
+            // Show a snippet of the most recent message to max 150 characters
+			if (recent_message["text"].length > 150) {
+                recent_message["text"] = recent_message["text"].substr(0, 147) + "...";
+			}
+            // If this user sent the message, put an "arrow"at the start
+			if (recent_message["to_me"] == false) {
+                recent_message["text"] = "&#8594; " + recent_message["text"];
+            }
+            // Add the HTML to the page
 			$('.messages ul').append('<li data-otherid="'+convoInfo[x]["other_id"]+'" data-convoid="'+id+'">\
 				<img class="avatar" src="avatar-standard.png" />\
 				<span class="name">'+other_user+'</span>\
-				<span class="recent-message">'+recent_content+'</span>\
+				<span class="recent-message">'+recent_message["text"]+'</span>\
 			</li>');
 		}
 		ActivateMessages();
